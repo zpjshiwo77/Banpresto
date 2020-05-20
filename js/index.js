@@ -16,7 +16,13 @@ $(document).ready(function(){
 			if(os.screenProp > 0.64) articleBox.addClass("screen159");
 			load_handler();
 		});
-		wxUser.init();
+		wxUser.init({
+			shareInfo:{
+				title: "一番赏",
+            	friend: '我在这里登记了我的赏品，看看有没有你需要的',
+            	timeline: '我在这里登记了我的赏品，看看有没有你需要的'
+			}
+		});
 	}//edn func
 	
 
@@ -51,7 +57,8 @@ $(document).ready(function(){
 	}//edn func
 	
 	//----------------------------------------页面逻辑代码----------------------------------------
-
+	var indexBox = $("#indexBox");
+	var idBox = $("#idBox");
 	
 
 	/**
@@ -76,6 +83,15 @@ $(document).ready(function(){
 	 */
 	function eventInit(){
 		$(".limitBtn").on("touchend",limitClick);
+
+		indexBox.find(".idBtn").on("touchend",showIdBox);
+	}
+
+	/**
+	 * 显示
+	 */
+	function showIdBox(){
+		icom.popOn(idBox)
 	}
 
 	/**

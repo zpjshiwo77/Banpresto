@@ -10,9 +10,9 @@ function WxUser() {
 
     _self.wxSigned = false;
     var dominUrl, shareInfo;
-    var appId = "wxf51a06ff7222539a";
+    var appId = "wxe3869e539fd487f6";
     var imonitor = window.imonitor || {};
-    var jsdkAPI = 'https://scrm2.beats-digital.com/scrm/api/getconfig';
+    var jsdkAPI = 'https://www.seventh77.com/API/wxjsdk/wxjsdk.php';
     var authAPI = 'http://t.phper.be-xx.com/invisalign/index.php';
 
     var returnUserInfo = null;
@@ -39,6 +39,7 @@ function WxUser() {
 
         if (opts.hasOwnProperty("shareInfo")) shareInfo = $.extend(shareInfo, opts.shareInfo);
         if (opts.hasOwnProperty("appId")) appId = opts.appId;
+        if (opts.hasOwnProperty("jsdkAPI")) jsdkAPI = opts.jsdkAPI;
 
         var data = {
             url: location.href,
@@ -46,7 +47,7 @@ function WxUser() {
         };
 
         $.get(jsdkAPI, data, function (data) {
-            wxShareConfig(data.data, shareInfo);
+            wxShareConfig(data.result, shareInfo);
         }, 'JSON')
     }
 
@@ -244,25 +245,9 @@ function WxUser() {
                 }
             },
             fail: function(failRes){
-                icom.alert(JSON.stringify(failRes));
+                alert(JSON.stringify(failRes));
             }
         });
-        // $.get(authAPI, data, function (data) {
-        //     console.log(data);
-        //     if (data.code == -10) {
-        //         var url = data.data.oath_url;
-        //         url = url.indexOf("?") == -1 ? url + "?" : url + "&";
-        //         url += "backurl=" + encodeURIComponent(location.href);
-        //         location.href = url;
-        //     }
-        //     else if (data.code == -11 && type == "Oath-getInfo") {
-        //         _refuseGetInfoAutoTips();
-        //     }
-        //     else if (data.code == 0) {
-        //         if (type == "Oath-getBase") _saveUserOpendId(data.data);
-        //         else if (type == "Oath-getInfo") _saveUserInfo(data.data);
-        //     }
-        // }, 'JSON')
     }
 
     /**

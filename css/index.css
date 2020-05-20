@@ -60,6 +60,247 @@ img{
 }
 /* anime end */
 
+#idBox .id{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	transform: translate(-50%, -50%);
+}
+#idBox p{
+	text-align: center;
+	font-size: 0.3rem;
+	line-height: 1.5;
+	color: #fff;
+	padding-top: 0.5rem;
+}
+/* idBox end */
+
+#indexBox .btnBox{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 2rem;
+}
+#indexBox .btnBox .btn{
+	float: left;
+	width: 3rem;
+	height: 0.7rem;
+	background-color: #333;
+	color: #fff;
+	font-size: 0.24rem;
+	text-align: center;
+	line-height: 0.7rem;
+	border-radius: 0.1rem;
+	margin-left: 0.5rem;
+	margin-top: 0.5rem;
+	cursor: pointer;
+}
+#indexBox .btnBox .btn:last-child{
+	float: right;
+	margin-right: 0.5rem;
+	margin-left: 0;
+}
+
+#indexBox .searchBox{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 2rem;
+}
+#indexBox .searchBox .selectBox{
+	float: left;
+	width: 3rem;
+	height: 0.7rem;
+	background-color: #333;
+	color: #fff;
+	font-size: 0.24rem;
+	text-align: center;
+	line-height: 0.7rem;
+	border-radius: 0.1rem;
+	margin-left: 0.5rem;
+	margin-top: 0.3rem;
+	padding-left: 0.1rem;
+}
+#indexBox .searchBox .selectBox:after{
+	content: "∨";
+	color: #fff;
+}
+#indexBox .searchBox .selectBox select{
+	width: 80%;
+	height: 100%;
+	font-size: 0.24rem;
+	color: #fff;
+	text-align: center;
+}
+#indexBox .searchBox .btn{
+	position: absolute;
+	bottom: 0;
+	left: 0.5rem;
+	width: 6.5rem;
+	height: 0.7rem;
+	color: #fff;
+	font-size: 0.24rem;
+	text-align: center;
+	line-height: 0.7rem;
+	border-radius: 0.1rem;
+	background-color: #333;
+}
+
+#listBox{
+	position: absolute;
+	top: 2rem;
+	left: 0;
+	right: 0;
+	bottom: 2rem;
+}
+#listBox .block{
+	width: 6.5rem;
+	height: auto;
+	margin: 0.5rem auto;
+	border-bottom: 1px solid #333;
+	padding-bottom: 0.2rem;
+}
+#listBox .block .nameBox{
+	width: 100%;
+	height: 1rem;
+}
+#listBox .block .nameBox .nickname{
+	float: left;
+	width: 2rem;
+	height: 0.7rem;
+	font-size: 0.3rem;
+	font-weight: bold;
+	line-height: 0.7rem;
+	color: #333;
+	border-radius: 0.1rem;
+	/* background-color: #333; */
+	overflow: hidden;/*内容超出后隐藏*/
+	text-overflow: ellipsis;/* 超出内容显示为省略号*/
+	white-space: nowrap;/*文本不进行换行*/
+}
+#listBox .block .nameBox .num{
+	float: right;
+	width: 4rem;
+	height: 0.7rem;
+	line-height: 0.7rem;
+	color: #333;
+	font-size: 0.3rem;
+	font-weight: bold;
+	border-radius: 0.1rem;
+	/* background-color: #333; */
+}
+#listBox .block .listBox p{
+	font-size: 0.24rem;
+	padding-bottom: 0.3rem;
+	color: #333;
+}
+#listBox .block .listBox p span{
+	padding: 0.05rem 0.1rem;
+	background-color: #333;
+	color: #fff;
+	font-size: 0.24rem;
+	border-radius: 0.05rem;
+	margin: 0 0.2rem;
+}
+/* indexBox end */
+
+#inputBox{
+	background-color: #fff;
+}
+#inputBox .searchBox{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 2rem;
+}
+#inputBox .searchBox .selectBox{
+	float: left;
+	width: 3rem;
+	height: 0.7rem;
+	background-color: #333;
+	color: #fff;
+	font-size: 0.24rem;
+	text-align: center;
+	line-height: 0.7rem;
+	border-radius: 0.1rem;
+	margin-left: 0.5rem;
+	margin-top: 0.3rem;
+	padding-left: 0.1rem;
+}
+#inputBox .searchBox .selectBox:after{
+	content: "∨";
+	color: #fff;
+}
+#inputBox .searchBox .selectBox select{
+	width: 80%;
+	height: 100%;
+	font-size: 0.24rem;
+	color: #fff;
+	text-align: center;
+}
+#inputBox .searchBox .label{
+	float: left;
+	margin-left: 0.5rem;
+	width: 6.5rem;
+	font-size: 0.24rem;
+	color: #333;
+	padding-top: 0.2rem;
+}
+#inputBox .searchBox .label input{
+	width: 3rem;
+	border: 1px solid #333;
+}
+#inputBox #listBox{
+	top: 5rem;
+}
+#inputBox #listBox .block{
+	border: none;
+}
+#inputBox #listBox .block span{
+	cursor: pointer;
+}
+#inputBox #listBox .block .nameBox{
+	width: 6.5rem;
+	height: 2rem;
+}
+#inputBox #listBox .block .nameBox input{
+	border: 1px solid #333;
+	color: #333;
+	height: 0.7rem;
+	font-size: 0.24rem;
+	padding-left: 0.2rem;
+}
+#inputBox #listBox .block .nameBox .changeBtn{
+	position: absolute;
+	bottom: 0.4rem;
+	left: 0;
+	width: 6.5rem;
+	height: 0.7rem;
+	color: #fff;
+	font-size: 0.24rem;
+	text-align: center;
+	line-height: 0.7rem;
+	border-radius: 0.1rem;
+	background-color: #333;
+}
+.addBtn{
+	position: absolute;
+	top: 4.3rem;
+	left: 0.5rem;
+	width: 6.5rem;
+	height: 0.7rem;
+	color: #fff;
+	font-size: 0.24rem;
+	text-align: center;
+	line-height: 0.7rem;
+	border-radius: 0.1rem;
+	background-color: #333;
+}
+/* inputBox end */
 /*---------------------------------------- 15:9 ----------------------*/
 
 /*---------------------------------------- 16:9 ----------------------*/

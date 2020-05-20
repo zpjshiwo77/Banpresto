@@ -9,7 +9,7 @@ select,input,img{vertical-align:middle;border:none;outline:none;}
 textarea {resize: none;} /*webkit核心中textare取消拖动调整大小*/
 textarea:focus {outline: none;} /*textarea聚焦时默认边框颜色不变*/
 select,input[type=text],input[type=tel],input[type=password],input[type=number],textarea{ -webkit-appearance:none; border:none; border-radius:0; background-color:transparent; font-family: arial; }
-input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#fff;}/* placeholder文字的颜色*/
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#333;}/* placeholder文字的颜色*/
 a{ text-decoration:none; display:inline-block;}
 a>img{ width:100%;}
 sup,sub{ font-size: 60%;}
