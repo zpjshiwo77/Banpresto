@@ -1,0 +1,67 @@
+/* ---------------------------------------- 默认css针对16:9标准比例屏幕微信----------------------------------------*/
+html,body,article{
+	position: fixed;
+	padding: 0;
+	margin: 0;
+	height: 100%!important;
+    width: 100%;
+	overflow: hidden;
+	-webkit-text-size-adjust:100%!important;
+}
+.none{
+	display: none;
+}
+.hide{
+	opacity: 0;
+}
+a{
+	cursor: pointer;
+}
+a, a:visited{
+	color: #fff;
+}
+section{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    top:0;
+    left: 0;
+    z-index: 3;
+}
+aside{
+	position: fixed;
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    z-index: 19;
+    background-color: rgba(0,0,0,0.85);
+}
+.full{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+img{
+	/* pointer-events: none; */
+}
+/* public end */
+
+.lighting{
+	-webkit-animation: lighting 3s ease infinite;
+}
+@-webkit-keyframes lighting{
+	0%{opacity: 0.3;}
+	50%{opacity: 1;}
+	100%{opacity: 0.3;}
+}
+/* anime end */
+
+/*---------------------------------------- 15:9 ----------------------*/
+
+/*---------------------------------------- 16:9 ----------------------*/
+
+/*---------------------------------------- 18:9 ----------------------*/
