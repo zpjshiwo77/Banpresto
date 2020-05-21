@@ -146,7 +146,7 @@ img{
 	text-align: center;
 	line-height: 0.7rem;
 	border-radius: 0.1rem;
-	background-color: #333;
+	background-color: rgb(193,153,209);
 }
 
 #listBox{
@@ -155,6 +155,11 @@ img{
 	left: 0;
 	right: 0;
 	bottom: 2rem;
+	overflow: hidden;
+}
+#listBox .scrollBox{
+	width: 100%;
+	height: auto;
 }
 #listBox .block{
 	width: 6.5rem;
@@ -250,34 +255,56 @@ img{
 	color: #333;
 	padding-top: 0.2rem;
 }
+#inputBox .searchBox .label.sp{
+	color: #F47983;
+	font-size: 0.3rem;
+}
 #inputBox .searchBox .label input{
 	width: 3rem;
 	border: 1px solid #333;
 }
-#inputBox #listBox{
+#inputBox #listBox2{
 	top: 5rem;
 }
-#inputBox #listBox .block{
+#inputBox #listBox2 .block{
 	border: none;
 }
-#inputBox #listBox .block span{
+#inputBox #listBox2 .block span{
 	cursor: pointer;
 }
-#inputBox #listBox .block .nameBox{
+#inputBox #listBox2 .block .nameBox{
 	width: 6.5rem;
 	height: 2rem;
 }
-#inputBox #listBox .block .nameBox input{
+#inputBox #listBox2 .block .nameBox input{
 	border: 1px solid #333;
 	color: #333;
 	height: 0.7rem;
+	width: 3rem;
 	font-size: 0.24rem;
 	padding-left: 0.2rem;
+	float: left;
 }
-#inputBox #listBox .block .nameBox .changeBtn{
+#inputBox #listBox2 .block .nameBox input:nth-child(2){
+	float: right;
+}
+#inputBox #listBox2 .block .nameBox .changeBtn{
 	position: absolute;
 	bottom: 0.4rem;
 	left: 0;
+	width: 6.5rem;
+	height: 0.7rem;
+	color: #fff;
+	font-size: 0.24rem;
+	text-align: center;
+	line-height: 0.7rem;
+	border-radius: 0.1rem;
+	background-color: rgb(193,153,209);
+}
+#inputBox .closeBtn{
+	position: absolute;
+	bottom: 0.2rem;
+	left: 0.5rem;
 	width: 6.5rem;
 	height: 0.7rem;
 	color: #fff;
@@ -298,9 +325,71 @@ img{
 	text-align: center;
 	line-height: 0.7rem;
 	border-radius: 0.1rem;
-	background-color: #333;
+	background-color: rgb(129, 210, 238);
 }
 /* inputBox end */
+
+#listBox2{
+	position: absolute;
+	top: 2rem;
+	left: 0;
+	right: 0;
+	bottom: 2rem;
+	overflow: hidden;
+}
+#listBox2 .scrollBox{
+	width: 100%;
+	height: auto;
+}
+#listBox2 .block{
+	width: 6.5rem;
+	height: auto;
+	margin: 0.5rem auto;
+	border-bottom: 1px solid #333;
+	padding-bottom: 0.2rem;
+}
+#listBox2 .block .nameBox{
+	width: 100%;
+	height: 1rem;
+}
+#listBox2 .block .nameBox .nickname{
+	float: left;
+	width: 2rem;
+	height: 0.7rem;
+	font-size: 0.3rem;
+	font-weight: bold;
+	line-height: 0.7rem;
+	color: #333;
+	border-radius: 0.1rem;
+	/* background-color: #333; */
+	overflow: hidden;/*内容超出后隐藏*/
+	text-overflow: ellipsis;/* 超出内容显示为省略号*/
+	white-space: nowrap;/*文本不进行换行*/
+}
+#listBox2 .block .nameBox .num{
+	float: right;
+	width: 4rem;
+	height: 0.7rem;
+	line-height: 0.7rem;
+	color: #333;
+	font-size: 0.3rem;
+	font-weight: bold;
+	border-radius: 0.1rem;
+	/* background-color: #333; */
+}
+#listBox2 .block .listBox2 p{
+	font-size: 0.24rem;
+	padding-bottom: 0.3rem;
+	color: #333;
+}
+#listBox2 .block .listBox p span{
+	padding: 0.05rem 0.1rem;
+	background-color: #333;
+	color: #fff;
+	font-size: 0.24rem;
+	border-radius: 0.05rem;
+	margin: 0 0.2rem;
+}
 /*---------------------------------------- 15:9 ----------------------*/
 
 /*---------------------------------------- 16:9 ----------------------*/
