@@ -61,7 +61,14 @@ $(document).ready(function(){
 	var idBox = $("#idBox");
 	var inputBox = $("#inputBox");
 	
-
+	var listBoxScroll = new IScroll('#listBox',{
+		bounce:false,
+		click:true,
+	});
+	var listBoxScroll2 = new IScroll('#listBox2',{
+		bounce:false,
+		click:true,
+	});
 	/**
 	 * 页面初始化
 	 */
@@ -71,7 +78,9 @@ $(document).ready(function(){
 		monitor_handler();
 		addUser();
 		getRecords();
-		getRecords();
+		selectInit($("#Stype"),$("#Sname"));
+		selectInit($("#Atype"),$("#Aname"));
+		selectInit($("#Btype"),$("#Bname"));
 	}//end func
 	
 	/**
@@ -80,6 +89,26 @@ $(document).ready(function(){
 	function DevelopTest(){
 		loadingBox.hide();
 		QABox.show();
+	}
+
+	/**
+	 * 选择器初始化
+	 */
+	function selectInit(selectA,selectB){
+		var contA = "";
+		for (const key in choseData) {
+			const ele = choseData[key];
+			contA += '<option value="'+key+'">'+key+'</option>';
+		}
+		selectA.empty().append(contA);
+
+		var arr = choseData["和之国"].list;
+		var contB = "";
+		for (let i = 0; i < arr.length; i++) {
+			const ele = arr[i];
+			contB += '<option value="'+ele+'">'+ele+'</option>';
+		}
+		selectB.empty().append(contB);
 	}
 
 	/**
@@ -94,6 +123,73 @@ $(document).ready(function(){
 		inputBox.find(".closeBtn").on("touchend",CloseInputBox);
 		inputBox.find(".changeBtn").on("touchend",changeName);
 		inputBox.find(".addBtn").on("touchend",addRecord);
+		inputBox.on("touchend",".del",delRecord);
+
+		$("#Stype").on("change",changeSelectS);
+		$("#Atype").on("change",changeSelectA);
+		$("#Btype").on("change",changeSelectB);
+	}
+	
+	/**
+	 * 修改选择器
+	 */
+	function changeSelectS(){
+		var val = $("#Stype").val();
+
+		var arr = choseData[val].list;
+		var contB = "";
+		for (let i = 0; i < arr.length; i++) {
+			const ele = arr[i];
+			contB += '<option value="'+ele+'">'+ele+'</option>';
+		}
+		$("#Sname").empty().append(contB);
+	}
+
+	/**
+	 * 修改选择器
+	 */
+	function changeSelectA(){
+		var val = $("#Atype").val();
+
+		var arr = choseData[val].list;
+		var contB = "";
+		for (let i = 0; i < arr.length; i++) {
+			const ele = arr[i];
+			contB += '<option value="'+ele+'">'+ele+'</option>';
+		}
+		$("#Aname").empty().append(contB);
+	}
+
+	/**
+	 * 修改选择器
+	 */
+	function changeSelectB(){
+		var val = $("#Btype").val();
+
+		var arr = choseData[val].list;
+		var contB = "";
+		for (let i = 0; i < arr.length; i++) {
+			const ele = arr[i];
+			contB += '<option value="'+ele+'">'+ele+'</option>';
+		}
+		$("#Bname").empty().append(contB);
+	}
+
+	/**
+	 * 删除记录
+	 */
+	function delRecord(){
+		var id = $(this).data("id");
+		API.deleteRecord({id:id},function(data){
+			if(data.errorCode == 0){
+				icom.alert("删除成功");
+				for (const key in userData) {
+					const ele = userData[key];
+					ele.record = [];
+				}
+				getRecords();
+			}
+		})
 	}
 
 	/**
@@ -106,8 +202,8 @@ $(document).ready(function(){
 		var Aname = $("#Aname").val();
 		var Btype = $("#Btype").val();
 		var Bname = $("#Bname").val();
-		if(numsA = "") icom.alert("请输入数量");
-		else if(numsB = "") icom.alert("请输入数量");
+		if(numsA == "" || numsA < 1 || numsA > 99) icom.alert("请输入正确数量，大于1，小于99");
+		else if(numsB == "" || numsA < 1 || numsB > 99) icom.alert("请输入正确数量，大于1，小于99");
 		else{
 			API.addRecord({
 				key:localStorage.ikey,
@@ -115,6 +211,7 @@ $(document).ready(function(){
 			},function(data){
 				if(data.errorCode == 0){
 					icom.alert("添加成功")
+					getRecords();
 				}
 				else{
 					icom.alert("添加失败")
@@ -172,6 +269,7 @@ $(document).ready(function(){
 	 */
 	function showInputBox(){
 		icom.fadeIn(inputBox);
+		listBoxScroll2.refresh();
 	}
 
 	/**
@@ -224,14 +322,62 @@ $(document).ready(function(){
 		setTimeout(function(){
 			icom.fadeOut(loadBox);
 			updateIndexList();
-		},2000);
+			updateUserList();
+		},1000);
 	}
 
 	/**
 	 * 更新首页列表
 	 */
 	function updateIndexList(){
-		console.log(userData)
+		// console.log(userData)
+		var box = $("#listBox .scrollBox");
+		var cont = "";
+		for (const key in userData) {
+			const ele = userData[key];
+			if(ele.record.length == 0) continue;
+			cont += `<div class="block">
+						<div class="nameBox">
+							<div class="nickname">${ele.name}</div>
+							<div class="num">微信号：${ele.wxcode}</div>
+						</div>
+						<div class="listBox">`;
+
+			for (let i = 0; i < ele.record.length; i++) {
+				const element = ele.record[i];
+				cont += element.word;
+			}
+
+			cont += `</div></div>`;
+		}
+
+		box.empty().append(cont);
+		listBoxScroll.refresh();
+	}
+
+	/**
+	 * 更新用户列表
+	 */
+	function updateUserList(){
+		// console.log(userData)
+		var data = [];
+		var box = $("#listBox2 .listBox");
+		var cont = "";
+
+		for (const key in userData) {
+			const ele = userData[key];
+			if(key == localStorage.ikey){
+				data = ele.record;
+				break;
+			}
+		}
+		
+		for (let i = 0; i < data.length; i++) {
+			const ele = data[i];
+			cont += ele.word.replace('</p>','<span data-id="'+ele.id+'" class="del">删除</span></p>');
+		}
+		box.empty().append(cont);
+		listBoxScroll2.refresh();
 	}
 
 	/**
@@ -265,8 +411,8 @@ $(document).ready(function(){
 		userData[key].record.push(data);
 		API.getUser({key:key},function(data){
 			if(data.errorCode == 0){
-				userData[key]["name"] = data.result.name;
-				userData[key]["wxcode"] = data.result.wxCode;
+				userData[key]["name"] = data.result.name == "" ? "保密" : data.result.name;
+				userData[key]["wxcode"] = data.result.wxCode == "" ? "保密" : data.result.wxCode;
 			}
 		})
 	}
