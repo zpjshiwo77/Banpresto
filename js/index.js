@@ -228,8 +228,8 @@ $(document).ready(function(){
 		if(key){
 			API.getUser({key:key},function(data){
 				if(data.errorCode == 0){
-					$("#iname").val(data.result.name);
-					$("#iId").val(data.result.wxCode);
+					$("#iname").val(data.result[0].name);
+					$("#iId").val(data.result[0].wxCode);
 				}
 			})
 		}
@@ -319,11 +319,30 @@ $(document).ready(function(){
 				craetOneUserData(item);
 			}
 		}
-		setTimeout(function(){
-			icom.fadeOut(loadBox);
-			updateIndexList();
-			updateUserList();
-		},1000);
+		updataUserInfo();
+	}
+
+	/**
+	 * 更新用户个人信息
+	 */
+	function updataUserInfo(){
+		var keys = ""
+		for (const key in userData) {
+			keys += key + ",";
+		}
+		keys = keys.substring(0,keys.length - 1);
+		API.getUser({key:keys},function(data){
+			if(data.errorCode == 0){
+				for (let i = 0; i < data.result.length; i++) {
+					const ele = data.result[i];
+					userData[ele.key]["name"] = ele.name == "" ? "保密" : ele.name;
+					userData[ele.key]["wxcode"] = ele.wxCode == "" ? "保密" : ele.wxCode;
+				}
+				icom.fadeOut(loadBox);
+				updateIndexList();
+				updateUserList();
+			}
+		})
 	}
 
 	/**
@@ -408,13 +427,9 @@ $(document).ready(function(){
 		userData[key] = {};
 		userData[key]["key"] = key;
 		userData[key]["record"] = [];
+		userData[key]["name"] = "保密";
+		userData[key]["wxCode"] = "保密";
 		userData[key].record.push(data);
-		API.getUser({key:key},function(data){
-			if(data.errorCode == 0){
-				userData[key]["name"] = data.result.name == "" ? "保密" : data.result.name;
-				userData[key]["wxcode"] = data.result.wxCode == "" ? "保密" : data.result.wxCode;
-			}
-		})
 	}
 
 	/**
