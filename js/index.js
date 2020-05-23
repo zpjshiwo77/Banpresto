@@ -102,7 +102,7 @@ $(document).ready(function(){
 		}
 		selectA.empty().append(contA);
 
-		var arr = choseData["和之国"].list;
+		var arr = choseData["狂热行动"].list;
 		var contB = "";
 		for (let i = 0; i < arr.length; i++) {
 			const ele = arr[i];
