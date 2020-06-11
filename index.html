@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>一番赏换换登记</title>
+    <title>一番赏换换demo</title>
     <meta charset="utf-8">
     <meta name="viewport"
         content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -22,99 +22,99 @@
 <body>
     <!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------------->
     <article style="display: none;">
-        <section id="indexBox">
-            <div class="searchBox">
-                <div class="selectBox">
-                    <select id="Stype">
-                        
-                    </select>
-                </div>
-                <div class="selectBox">
-                    <select id="Sname">
-                        
-                    </select>
-                </div>
-                <div class="btn seachBtn">搜索</div>
-                <div class="mask">搜索功能暂时没写</div>
-            </div>
-            <div id="listBox">
+        <section id="indexBox" class="normalBox">
+            <div class="title">我的赏袋</div>
+            <div class="awardList" id="myAwardList">
                 <div class="scrollBox">
-                    <!-- <div class="block">
-                        <div class="nameBox">
-                            <div class="nickname"></div>
-                            <div class="num">微信号:</div>
-                        </div>
-                        <div class="listBox">
-                            <p>和之国A赏路飞 * 1<span>换</span>兄弟羁绊B赏艾斯 * 1</p>
-                        </div>
-                    </div> -->
+                    <div class="award">
+                        <div class="name">神龙</div>
+                    </div>
+                    <div class="award">
+                        <div class="name">神龙</div>
+                    </div>
+                    <div class="award">
+                        <div class="name">神龙</div>
+                    </div>
                 </div>
             </div>
+            <p class="tips none">赏袋空空如也，快去买赏吧!</p>
             <div class="btnBox">
-                <div class="btn regBtn">我也要登记</div>
-                <div class="btn idBtn">查看预约券对应赏品</div>
+                <div class="btn limitBtn">
+                    <img src="images/icon/btn.png" class="full">
+                </div>
+            </div>
+            <div class="creatBtn" id="enterTrade">
+                <img src="images/icon/icon.png" class="full">
             </div>
         </section>
 
-        <section id="inputBox" class="none">
-            <div class="searchBox">
-                <div class="label sp">想用什么换？</div>
-                <div class="selectBox">
-                    <select id="Atype">
-                        <option value="兄弟羁绊">兄弟羁绊</option>
-                        <option value="美少女战士">美少女战士</option>
-                        <option value="魔法少女樱">魔法少女樱</option>
-                        <option value="和之国">和之国</option>
-                    </select>
-                </div>
-                <div class="selectBox">
-                    <select id="Aname">
-                        <option value="A赏路飞">A赏路飞</option>
-                        <option value="B赏艾斯">B赏艾斯</option>
-                    </select>
-                </div>
-                <div class="label">数量：<input type="tel" id="numsA"></div>
-            </div>
-            <div class="searchBox" style="top:2rem;">
-                <div class="label sp">想换什么？</div>
-                <div class="selectBox">
-                    <select id="Btype">
-                        <option value="兄弟羁绊">兄弟羁绊</option>
-                        <option value="美少女战士">美少女战士</option>
-                        <option value="魔法少女樱">魔法少女樱</option>
-                        <option value="和之国">和之国</option>
-                    </select>
-                </div>
-                <div class="selectBox">
-                    <select id="Bname">
-                        <option value="A赏路飞">A赏路飞</option>
-                        <option value="B赏艾斯">B赏艾斯</option>
-                    </select>
-                </div>
-                <div class="label">数量：<input type="tel" id="numsB"></div>
-            </div>
-            <div class="addBtn">新增</div>
-            <div id="listBox2">
-                <div class="scroll">
-                    <div class="block">
-                        <div class="nameBox">
-                            <input type="text" id="iname" placeholder="昵称">
-                            <input type="text" id="iId" placeholder="微信号">
-                            <div class="changeBtn">修改</div>
+        <section id="tradeBox" class="normalBox none">
+            <div class="cont">
+                <div class="otherBox">
+                    <div class="title">他的交易赏品</div>
+                    <div class="awardList" id="hisTradeAwardList">
+                        <div class="scrollBox">
+                            <div class="award ">
+                                <div class="name">神龙</div>
+                            </div>
                         </div>
-                        <div class="listBox">
-                                <!-- <p>和之国A赏路飞 * 1<span>换</span>兄弟羁绊B赏艾斯 * 1<span class="del">删除</span></p> -->
+                    </div>
+                </div>
+                <div class="myBox">
+                    <div class="title">你的交易赏品</div>
+                    <div class="awardList" id="myTradeAwardList">
+                        <div class="scrollBox">
+                            <div class="award ">
+                                <div class="name">神龙</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="closeBtn">关闭</div>
+            <div class="creatBtn" id="enterChose">
+                <img src="images/icon/icon2.png" class="full">
+            </div>
+            <div class="btnBox">
+                <div class="btn limitBtn" id="lockBtn">
+                    <img src="images/icon/btn3.png" class="full">
+                </div>
+                <div class="btn limitBtn" id="tradeBtn">
+                    <img src="images/icon/btn4.png" class="full">
+                </div>
+            </div>
         </section>
 
-        <aside id="idBox" class="none">
-            <p>预售赏券号对应赏品<br>查看券号最后两位，可得到对应赏品</p>
-            <img src="images/id.png" class="id">
+        <aside id="choseBox" class="normalBox none">
+            <div class="title">选择你想交易的赏品</div>
+            <div class="awardList" id="choseAwardList">
+                <div class="scrollBox">
+                    <div class="award ">
+                        <div class="name">神龙</div>
+                    </div>
+                </div>
+            </div>
+            <p class="tips none">赏袋空空如也，快去买赏吧!</p>
+            <div class="btnBox">
+                <div class="btn limitBtn" id="choseBtn">
+                    <img src="images/icon/btn2.png" class="full">
+                </div>
+            </div>
+        </aside>
+
+        <aside id="getAwardBox" class="none">
+            <div class="cont">
+                <div class="title">恭喜获得</div>
+                <div class="awardList" id="getAwardList">
+                    <div class="scrollBox">
+                        <div class="award">
+                            <div class="name">神龙</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="tips">赏品已放入赏袋</p>
+                <div class="btn limitBtn" id="closeBtn">继续</div>
+            </div>
         </aside>
     </article>
     <!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
@@ -124,7 +124,7 @@
     <script src="js/base/monitor.js"></script>
     <script src="js/base/wxUser.js?v=4"></script>
     <script src="js/plugs/data.js?v=7"></script>
-    <script src="js/plugs/API.js"></script>
+    <script src="js/plugs/ws.js"></script>
     <script src="js/plugs/iscroll.js"></script>
     <script>ibase.load('js/index.js');</script>
 </body>

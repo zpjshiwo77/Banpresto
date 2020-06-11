@@ -58,17 +58,37 @@ $(document).ready(function(){
 	
 	//----------------------------------------页面逻辑代码----------------------------------------
 	var indexBox = $("#indexBox");
-	var idBox = $("#idBox");
-	var inputBox = $("#inputBox");
+	var tradeBox = $("#tradeBox");
+	var choseBox = $("#choseBox");
+	var getAwardBox = $("#getAwardBox");
+
+	var myAward = [];
 	
-	var listBoxScroll = new IScroll('#listBox',{
+	var myAwardList = new IScroll('#myAwardList',{
 		bounce:false,
 		click:true,
 	});
-	var listBoxScroll2 = new IScroll('#listBox2',{
+
+	var hisTradeAwardList = new IScroll('#hisTradeAwardList',{
 		bounce:false,
 		click:true,
 	});
+
+	var myTradeAwardList = new IScroll('#myTradeAwardList',{
+		bounce:false,
+		click:true,
+	});
+
+	var choseAwardList = new IScroll('#choseAwardList',{
+		bounce:false,
+		click:true,
+	});
+
+	var getAwardList = new IScroll('#getAwardList',{
+		bounce:false,
+		click:true,
+	});
+
 	/**
 	 * 页面初始化
 	 */
@@ -77,10 +97,6 @@ $(document).ready(function(){
 		// DevelopTest();
 		monitor_handler();
 		addUser();
-		getRecords();
-		selectInit($("#Stype"),$("#Sname"));
-		selectInit($("#Atype"),$("#Aname"));
-		selectInit($("#Btype"),$("#Bname"));
 	}//end func
 	
 	/**
@@ -92,191 +108,36 @@ $(document).ready(function(){
 	}
 
 	/**
-	 * 选择器初始化
-	 */
-	function selectInit(selectA,selectB){
-		var contA = "";
-		for (const key in choseData) {
-			const ele = choseData[key];
-			contA += '<option value="'+key+'">'+key+'</option>';
-		}
-		selectA.empty().append(contA);
-
-		var arr = choseData["狂热行动"].list;
-		var contB = "";
-		for (let i = 0; i < arr.length; i++) {
-			const ele = arr[i];
-			contB += '<option value="'+ele+'">'+ele+'</option>';
-		}
-		selectB.empty().append(contB);
-	}
-
-	/**
 	 * 事件初始化
 	 */
 	function eventInit(){
 		$(".limitBtn").on("touchend",limitClick);
 
-		indexBox.find(".idBtn").on("touchend",showIdBox);
-		indexBox.find(".regBtn").on("touchend",showInputBox);
+		$("#closeBtn").on("touchend",closeGetAwardBox);
+	}
 
-		inputBox.find(".closeBtn").on("touchend",CloseInputBox);
-		inputBox.find(".changeBtn").on("touchend",changeName);
-		inputBox.find(".addBtn").on("touchend",addRecord);
-		inputBox.on("touchend",".del",delRecord);
-
-		$("#Stype").on("change",changeSelectS);
-		$("#Atype").on("change",changeSelectA);
-		$("#Btype").on("change",changeSelectB);
+	/**
+	 * 关闭获奖页面
+	 */
+	function closeGetAwardBox(){
+		icom.fadeOut(getAwardBox);
 	}
 	
-	/**
-	 * 修改选择器
-	 */
-	function changeSelectS(){
-		var val = $("#Stype").val();
-
-		var arr = choseData[val].list;
-		var contB = "";
-		for (let i = 0; i < arr.length; i++) {
-			const ele = arr[i];
-			contB += '<option value="'+ele+'">'+ele+'</option>';
-		}
-		$("#Sname").empty().append(contB);
-	}
-
-	/**
-	 * 修改选择器
-	 */
-	function changeSelectA(){
-		var val = $("#Atype").val();
-
-		var arr = choseData[val].list;
-		var contB = "";
-		for (let i = 0; i < arr.length; i++) {
-			const ele = arr[i];
-			contB += '<option value="'+ele+'">'+ele+'</option>';
-		}
-		$("#Aname").empty().append(contB);
-	}
-
-	/**
-	 * 修改选择器
-	 */
-	function changeSelectB(){
-		var val = $("#Btype").val();
-
-		var arr = choseData[val].list;
-		var contB = "";
-		for (let i = 0; i < arr.length; i++) {
-			const ele = arr[i];
-			contB += '<option value="'+ele+'">'+ele+'</option>';
-		}
-		$("#Bname").empty().append(contB);
-	}
-
-	/**
-	 * 删除记录
-	 */
-	function delRecord(){
-		var id = $(this).data("id");
-		API.deleteRecord({id:id},function(data){
-			if(data.errorCode == 0){
-				icom.alert("删除成功");
-				for (const key in userData) {
-					const ele = userData[key];
-					ele.record = [];
-				}
-				getRecords();
-			}
-		})
-	}
-
-	/**
-	 * 添加记录
-	 */
-	function addRecord(){
-		var numsA = $("#numsA").val();
-		var numsB = $("#numsB").val();
-		var Atype = $("#Atype").val();
-		var Aname = $("#Aname").val();
-		var Btype = $("#Btype").val();
-		var Bname = $("#Bname").val();
-		if(numsA == "" || numsA < 1 || numsA > 99) icom.alert("请输入正确数量，大于1，小于99");
-		else if(numsB == "" || numsA < 1 || numsB > 99) icom.alert("请输入正确数量，大于1，小于99");
-		else{
-			API.addRecord({
-				key:localStorage.ikey,
-				word:`<p>${Atype+Aname} * ${numsA}<span>换</span>${Btype+Bname} * ${numsB}</p>`
-			},function(data){
-				if(data.errorCode == 0){
-					icom.alert("添加成功")
-					getRecords();
-				}
-				else{
-					icom.alert("添加失败")
-				}
-			})
-		}
-	}
-
 	/**
 	 * 添加用户
 	 */
 	function addUser(){
 		var key = localStorage.ikey;
-		if(key){
-			API.getUser({key:key},function(data){
-				if(data.errorCode == 0){
-					$("#iname").val(data.result[0].name);
-					$("#iId").val(data.result[0].wxCode);
-				}
-			})
-		}
-		else{
+		if(!key){
 			key = randomString(16);
 			localStorage.ikey = key;
-			API.addUser({
-				key:key,
-				name:"",
-				wxcode:""
-			});
+			getAward();
+			setTimeout(function(){
+				renderGetAwardBox();
+			},10)
 		}
-	}
-
-	function changeName(){
-		var name = $("#iname").val();
-		var id = $("#iId").val();
-		if(name == "") icom.alert("请输入昵称");
-		else{
-			API.addUser({
-				key:localStorage.ikey,
-				name:name,
-				wxcode:id
-			},function(data){
-				if(data.errorCode == 0){
-					icom.alert("修改成功")
-				}
-				else{
-					icom.alert("修改失败")
-				}
-			});
-		}
-	}
-
-	/**
-	 * 显示输入的页面
-	 */
-	function showInputBox(){
-		icom.fadeIn(inputBox);
-		listBoxScroll2.refresh();
-	}
-
-	/**
-	 * 关闭输入页面
-	 */
-	function CloseInputBox(){
-		icom.fadeOut(inputBox);
+		myAward = localStorage.iawards.split(",");
+		renderMyAwardList();
 	}
 
 	/**
@@ -284,159 +145,60 @@ $(document).ready(function(){
 	 * @param {*} len 
 	 */
 	function randomString(len) {
-		　　len = len || 32;
-		　　var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
-		　　var maxPos = $chars.length;
-		　　var pwd = '';
-		　　for (i = 0; i < len; i++) {
-		　　　　pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
-		　　}
-		　　return pwd;
+		len = len || 32;
+		var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
+		var maxPos = $chars.length;
+		var pwd = '';
+		for (i = 0; i < len; i++) {
+			pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
 		}
-
-	/**
-	 * 获取记录
-	 */
-	function getRecords(){
-		loadBox.show();
-		API.getRecords(function(data){
-			if(data.errorCode == 0){
-				creatUserData(data.result);
-			}
-		});
+		return pwd;
 	}
 
 	/**
-	 * 创建用户数据
+	 * 渲染我的赏品
 	 */
-	function creatUserData(list){
-		for (let i = 0; i < list.length; i++) {
-			const item = list[i];
-			if(userData.hasOwnProperty(item.key)){
-				addOneUserData(item);
-			}
-			else{
-				craetOneUserData(item);
-			}
-		}
-		updataUserInfo();
-	}
-
-	/**
-	 * 更新用户个人信息
-	 */
-	function updataUserInfo(){
-		var keys = ""
-		for (const key in userData) {
-			keys += key + ",";
-		}
-		keys = keys.substring(0,keys.length - 1);
-		API.getUser({key:keys},function(data){
-			if(data.errorCode == 0){
-				for (let i = 0; i < data.result.length; i++) {
-					const ele = data.result[i];
-					userData[ele.key]["name"] = ele.name == "" ? "保密" : ele.name;
-					userData[ele.key]["wxcode"] = ele.wxCode == "" ? "保密" : ele.wxCode;
-				}
-				icom.fadeOut(loadBox);
-				updateIndexList();
-				updateUserList();
-			}
-		})
-	}
-
-	/**
-	 * 更新首页列表
-	 */
-	function updateIndexList(){
-		// console.log(userData)
-		var box = $("#listBox .scrollBox");
+	function renderMyAwardList(){
 		var cont = "";
-		for (const key in userData) {
-			const ele = userData[key];
-			if(ele.record.length == 0) continue;
-			cont += `<div class="block">
-						<div class="nameBox">
-							<div class="nickname">${ele.name}</div>
-							<div class="num">微信号：${ele.wxcode}</div>
-						</div>
-						<div class="listBox">`;
-
-			for (let i = 0; i < ele.record.length; i++) {
-				const element = ele.record[i];
-				cont += element.word;
-			}
-
-			cont += `</div></div>`;
+		for (let i = 0; i < myAward.length; i++) {
+			cont += makeAwardHtml(myAward[i]);
 		}
-
-		box.empty().append(cont);
-		listBoxScroll.refresh();
+		$("#myAwardList .scrollBox").empty().append(cont);
+		$("#choseAwardList .scrollBox").empty().append(cont);
+		myAwardList.refresh();
 	}
 
 	/**
-	 * 更新用户列表
+	 * 生成奖品的html
 	 */
-	function updateUserList(){
-		// console.log(userData)
-		var data = [];
-		var box = $("#listBox2 .listBox");
+	function makeAwardHtml(id){
+		return `<div class="award" style="background: url(images/award/${id}.jpg) no-repeat;background-size: cover;background-position: center;" data-id="${id}">
+					<div class="name">${awardData[id]}</div>
+				</div>`
+	}
+
+	/**
+	 * 渲染中的赏品
+	 */
+	function renderGetAwardBox(){
 		var cont = "";
-
-		for (const key in userData) {
-			const ele = userData[key];
-			if(key == localStorage.ikey){
-				data = ele.record;
-				break;
-			}
+		for (let i = 0; i < myAward.length; i++) {
+			cont += makeAwardHtml(myAward[i]);
 		}
-		
-		for (let i = 0; i < data.length; i++) {
-			const ele = data[i];
-			cont += ele.word.replace('</p>','<span data-id="'+ele.id+'" class="del">删除</span></p>');
+		$("#getAwardList .scrollBox").empty().append(cont);
+		getAwardBox.show();
+		getAwardList.refresh();
+	}
+
+	/**
+	 * 获取奖品
+	 */
+	function getAward(){
+		var awards = ""
+		for (let i = 0; i < 30; i++) {
+			awards += ( i == 0 ? "" : ",") + imath.randomRange(1,13);
 		}
-		box.empty().append(cont);
-		listBoxScroll2.refresh();
-	}
-
-	/**
-	 * 添加一个用户数据
-	 */
-	function addOneUserData(data){
-		var user = userData[data.key];
-		var bool = judgeExit(user.record,data);
-		if(bool) user.record.push(data);
-	}
-
-	/**
-	 * 判断是否存在
-	 */
-	function judgeExit(arr,item){
-		for (let i = 0; i < arr.length; i++) {
-			const ele = arr[i];
-			if(ele.id == item.id) return false;
-		}
-		return true;
-	}
-
-	/**
-	 * 添加一个用户
-	 */
-	function craetOneUserData(data){
-		var key = data.key;
-		userData[key] = {};
-		userData[key]["key"] = key;
-		userData[key]["record"] = [];
-		userData[key]["name"] = "保密";
-		userData[key]["wxCode"] = "保密";
-		userData[key].record.push(data);
-	}
-
-	/**
-	 * 显示
-	 */
-	function showIdBox(){
-		icom.popOn(idBox)
+		localStorage.iawards = awards;
 	}
 
 	/**
