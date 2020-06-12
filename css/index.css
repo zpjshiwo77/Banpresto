@@ -127,6 +127,15 @@ img{
 	margin-left: -1.5rem;
 	border-radius: 0.1rem;
 }
+#name{
+	display: block;
+	width: 3.5rem;
+	height: 0.7rem;
+	background-color: #fff;
+	margin: 0 auto;
+	font-size: 0.3rem;
+	padding: 0 0.3rem;
+}
 /* getAwardBox end */
 
 .normalBox{
@@ -251,6 +260,28 @@ img{
 	color: rgba(0,0,0,0.6);
 }
 /* tradeBox end */
+
+#choseBox .award.act:after{
+	content: "●";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.6);
+	font-size: 0.6rem;
+	line-height: 3;
+	font-weight: bold;
+	color: rgb(240,193,128);
+}
+
+#shareBox .share{
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	width: 4.8rem;
+}
 /*---------------------------------------- 15:9 ----------------------*/
 
 /*---------------------------------------- 16:9 ----------------------*/

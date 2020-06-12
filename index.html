@@ -21,29 +21,21 @@
 
 <body>
     <!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------------->
-    <article style="display: none;">
+    <article style="display: none;" class="noSelect">
         <section id="indexBox" class="normalBox">
             <div class="title">我的赏袋</div>
             <div class="awardList" id="myAwardList">
                 <div class="scrollBox">
-                    <div class="award">
-                        <div class="name">神龙</div>
-                    </div>
-                    <div class="award">
-                        <div class="name">神龙</div>
-                    </div>
-                    <div class="award">
-                        <div class="name">神龙</div>
-                    </div>
+                    
                 </div>
             </div>
             <p class="tips none">赏袋空空如也，快去买赏吧!</p>
             <div class="btnBox">
-                <div class="btn limitBtn">
+                <div class="btn limitBtn" id="tipsBtn">
                     <img src="images/icon/btn.png" class="full">
                 </div>
             </div>
-            <div class="creatBtn" id="enterTrade">
+            <div class="creatBtn limitBtn" id="enterTrade">
                 <img src="images/icon/icon.png" class="full">
             </div>
         </section>
@@ -54,9 +46,7 @@
                     <div class="title">他的交易赏品</div>
                     <div class="awardList" id="hisTradeAwardList">
                         <div class="scrollBox">
-                            <div class="award ">
-                                <div class="name">神龙</div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -64,15 +54,13 @@
                     <div class="title">你的交易赏品</div>
                     <div class="awardList" id="myTradeAwardList">
                         <div class="scrollBox">
-                            <div class="award ">
-                                <div class="name">神龙</div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="creatBtn" id="enterChose">
+            <div class="creatBtn limitBtn" id="enterChose">
                 <img src="images/icon/icon2.png" class="full">
             </div>
             <div class="btnBox">
@@ -89,9 +77,7 @@
             <div class="title">选择你想交易的赏品</div>
             <div class="awardList" id="choseAwardList">
                 <div class="scrollBox">
-                    <div class="award ">
-                        <div class="name">神龙</div>
-                    </div>
+                    
                 </div>
             </div>
             <p class="tips none">赏袋空空如也，快去买赏吧!</p>
@@ -104,17 +90,21 @@
 
         <aside id="getAwardBox" class="none">
             <div class="cont">
-                <div class="title">恭喜获得</div>
-                <div class="awardList" id="getAwardList">
+                <div class="title">输入昵称抽取赏品</div>
+                <input type="text" id="name" maxlength="10">
+                <div class="awardList none" id="getAwardList">
                     <div class="scrollBox">
-                        <div class="award">
-                            <div class="name">神龙</div>
-                        </div>
+                        
                     </div>
                 </div>
-                <p class="tips">赏品已放入赏袋</p>
-                <div class="btn limitBtn" id="closeBtn">继续</div>
+                <p class="tips none">赏品已放入赏袋</p>
+                <div class="btn limitBtn" id="confirmBtn">确认</div>
+                <div class="btn limitBtn none" id="closeBtn">继续</div>
             </div>
+        </aside>
+
+        <aside id="shareBox" class="none">
+            <img src="images/common/share.png" class="share">
         </aside>
     </article>
     <!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
@@ -122,9 +112,10 @@
     <script src="js/base/jquery.js"></script>
     <script src="js/base/framwork.js"></script>
     <script src="js/base/monitor.js"></script>
-    <script src="js/base/wxUser.js?v=4"></script>
+    <script src="js/base/wxUser.js?v=7"></script>
     <script src="js/plugs/data.js?v=7"></script>
-    <script src="js/plugs/ws.js"></script>
+    <script src="http://test.h5-x.com/bamboo/js/ws.js"></script>
+    <script src="js/plugs/trade.js"></script>
     <script src="js/plugs/iscroll.js"></script>
     <script>ibase.load('js/index.js');</script>
 </body>

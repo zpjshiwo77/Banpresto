@@ -10,9 +10,9 @@ function WxUser() {
 
     _self.wxSigned = false;
     var dominUrl, shareInfo;
-    var appId = "wxe3869e539fd487f6";
+    var appId = "wxf51a06ff7222539a";
     var imonitor = window.imonitor || {};
-    var jsdkAPI = 'https://www.seventh77.com/API/wxjsdk/wxjsdk.php';
+    var jsdkAPI = 'https://scrm2.beats-digital.com/scrm/api/getconfig';
     var authAPI = 'http://t.phper.be-xx.com/invisalign/index.php';
 
     var returnUserInfo = null;
@@ -47,7 +47,7 @@ function WxUser() {
         };
 
         $.get(jsdkAPI, data, function (data) {
-            wxShareConfig(data.result, shareInfo);
+            wxShareConfig(data.data, shareInfo);
         }, 'JSON')
     }
 
@@ -122,6 +122,7 @@ function WxUser() {
     function _sharInfoInit() {
         var hrefs = window.location.href.split('?');
         dominUrl = hrefs[0].substr(0, hrefs[0].lastIndexOf('/') + 1);
+        _self.dominUrl = dominUrl;
 
         shareInfo = {
             link: dominUrl,
